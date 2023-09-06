@@ -1,0 +1,1313 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Sep  5 11:15:50 2023
+
+@author: danielmaidana
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+S = np.array(['-','M', 'N', 'L', 'P', 'Y'])  
+T = np.array(['-','M', 'L', 'P', 'L', 'L'])   
+DP_Matrix = np.empty([len(S), len(T)])
+
+
+Gap = '-'
+Match_Score = 1
+Mismatch_Score = -1 
+Gap_Score = -4
+
+#------------------------------------------------------------------------------
+## STEP 1 -> Index (0,0)
+Step = 1
+
+i = 0
+j = 0 
+Si = S[i]
+Tj = T[j]
+
+DP_Matrix[i,j] = 0 # Gap Penalty
+DP_Matrix[1,0] = -4 
+DP_Matrix[2,0] = -8 
+DP_Matrix[3,0] = -12 
+DP_Matrix[4,0] = -16
+DP_Matrix[5,0] = -20
+DP_Matrix[0,1] = -4 
+DP_Matrix[0,2] = -8 
+DP_Matrix[0,3] = -12 
+DP_Matrix[0,4] = -16
+DP_Matrix[0,5] = -20
+
+
+#------------------------------------------------------------------------------
+## Index (1,1) 
+Step = 1
+
+i = 1
+j = 1
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = 6 
+else:                       # Mismatch
+    Alignment = Mismatch_Score
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (2,1) 
+Step = 2
+
+i = 2
+j = 1 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (3,1) 
+Step = 3
+
+i = 3
+j = 1 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 4
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (4,1) 
+Step = 4
+
+i = 4
+j = 1 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (5,1) 
+Step = 5
+
+i = 5
+j = 1
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (1,2) 
+Step = 6
+
+i = 1
+j = 2
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (2,2) 
+Step = 7
+
+i = 2
+j = 2
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (3,2) 
+Step = 8
+
+i = 3
+j = 2 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (4,2) 
+Step = 9
+
+i = 4
+j = 2
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (5,2) 
+Step = 10
+
+i = 5
+j = 2 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -1
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (1,3) 
+Step = 11
+
+i = 1
+j = 3 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -2
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (2,3) 
+Step = 12
+
+i = 2
+j = 3 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 0
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (3,3) 
+Step = 13
+
+i = 3
+j = 3
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -3
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (4,3) 
+Step = 14
+
+i = 4
+j = 3 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = 6 
+else:                       # Mismatch
+    Alignment = Mismatch_Score
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (5,3) 
+Step = 15
+
+i = 5
+j = 3 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -5
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (1,4) 
+Step = 16
+
+i = 1
+j = 4 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 4
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (2,4) 
+Step = 17
+
+i = 2
+j = 4 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -3
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (3,4) 
+Step = 18
+
+i = 3
+j = 4 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = 6 
+else:                       # Mismatch
+    Alignment = Mismatch_Score
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (4,4) 
+Step = 19
+
+i = 4
+j = 4 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -3
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (5,4) 
+Step = 20
+
+i = 5
+j = 4
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -1
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+## Index (1,5) 
+Step = 21
+
+i = 1
+j = 5
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = 4
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (2,5) 
+Step = 22
+
+i = 2
+j = 5 
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -3
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (3,5) 
+Step = 23
+
+i = 3
+j = 5
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = 6 
+else:                       # Mismatch
+    Alignment = Mismatch_Score
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (4,5) 
+Step = 24
+
+i = 4
+j = 5
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -3
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+## Index (5,5) 
+Step = 25
+
+i = 5
+j = 5
+Si = S[i]
+Tj = T[j]
+
+if Si == Gap or Tj == Gap:  # Gap
+    Alignment = Gap_Score
+elif Si == Tj:              # Match
+    Alignment = Match_Score 
+else:                       # Mismatch
+    Alignment = -1
+print('Step', Step)
+print('Index',i,',',j)
+print('(Si,Tj)', Si, Tj)
+print('Alignment', Alignment)    
+
+
+# Equation 1
+if i == 0 or j == 0:
+    Eq1 = -100000000
+    print('Eq1: Error')
+else:
+    Eq1 = DP_Matrix[i-1,j-1] + (Alignment)
+    print('Eq1:', Eq1,'> Diagonal')
+    
+# Equation 2
+if i == 0:
+    Eq2 = -100000000
+    print('Eq2: Error')
+else:    
+    Eq2 = DP_Matrix[i-1,j] + (Gap_Score)
+    print('Eq2:', Eq2,'> Top')
+
+# Equation 3
+if j == 0:
+    Eq3 = -100000000
+    print('Eq3: Error')
+else:   
+    Eq3 = DP_Matrix[i,j-1] + (Gap_Score)
+    print('Eq3:', Eq3,'> Left')
+
+
+Score = max(Eq1, Eq2, Eq3)
+print('Final Score',Score)
+DP_Matrix[i,j] = Score
+print('----------------------')
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+fig, ax = plt.subplots()
+im = ax.imshow(DP_Matrix, cmap = 'Blues', interpolation='none')
+
+xlabs = ['-','M', 'L', 'P', 'L', 'L']
+ylabs = ['-','M', 'N', 'L', 'P', 'Y']  
+ax.set_xticks(np.arange(len(xlabs)), labels = xlabs)
+ax.set_yticks(np.arange(len(ylabs)), labels = ylabs)
+plt.title("Q4: Dynamic Programming (PAM 250 Global)")
+
+for i in range(len(T)):
+    for j in range(len(S)):
+        text = ax.text(j, i, round(DP_Matrix[i, j]),
+                       ha = "center", va = "center", color = "black")
+plt.show()
