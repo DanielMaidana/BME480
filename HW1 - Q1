@@ -7,7 +7,7 @@ Created on Sun Sep  3 17:10:53 2023
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 
 
 S = np.array(['-','T', 'C', 'G', 'C'])  
